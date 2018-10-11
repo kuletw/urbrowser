@@ -1,13 +1,13 @@
 # Kule urBrowser
 Kule urBrowser 會把使用者的作業系統、裝置以及瀏覽器等資訊紀錄下來，並且儲存於 Localstorage、Cookie 與 html 標籤上。例如：
 ```
-<html id="mac" class="desktop chrome chrome6 webkit" data-browser-name="chrome" data-browser-version="6" data-browser-core="webkit" data-os-name="mac" data-device="desktop" data-bp="lg" data-inapp="false" data-webview="false" data-ub-version="4.0.1b">
+<html id="mac" class="desktop chrome chrome6 webkit" data-browser-name="chrome" data-browser-version="6" data-browser-core="webkit" data-os-name="mac" data-device="desktop" data-bp="lg" data-inapp="false" data-webview="false" data-ub-version="4.0.2b">
 ```
 
 ***
 
 ## 使用方式
-你可以[下載檔案](http://urbrowser.kule.tw/assets/js/kule.urbrowser.min.js) (ver. 4.0.1b)
+你可以[下載檔案](http://urbrowser.kule.tw/assets/js/kule.urbrowser.min.js) (ver. 4.0.2b)
 並且載入到你的網頁中，urBrowser就會自動執行，建議是第一個載入順序或放在所有 Javascript 的第一行。
 ```
 <script id="urbrowser" data-domain="你的網域" src="path/to/kule.urbrowser.min.js"></script>
