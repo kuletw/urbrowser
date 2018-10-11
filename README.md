@@ -7,7 +7,7 @@ Kule urBrowser 會把使用者的作業系統、裝置以及瀏覽器等資訊�
 ***
 
 ## 使用方式
-你可以[下載檔案](http://urbrowser.kule.tw/assets/js/kule.urbrowser.min.js) (ver. 4.0.2b)
+你可以[下載檔案](http://urbrowser.kule.tw/assets/js/kule.urbrowser.min.js) (ver. 4.0.3b)
 並且載入到你的網頁中，urBrowser就會自動執行，建議是第一個載入順序或放在所有 Javascript 的第一行。
 ```
 <script id="urbrowser" data-domain="你的網域" src="path/to/kule.urbrowser.min.js"></script>
