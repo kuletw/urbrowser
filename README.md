@@ -21,7 +21,7 @@ urBrowser 會把使用者的作業系統、裝置以及瀏覽器等資訊紀錄�
 <html id="mac" class="desktop chrome chrome6 webkit" data-browser-name="chrome" data-browser-version="6" data-browser-core="webkit" data-os-name="mac" data-device="desktop" data-bp="lg" data-inapp="false" data-webview="false" data-ub-version="4.0.1b">
 ```
 
-IE 9+, Edge 12+, Chrome 4+, Firefox 3.5+, Safari 4+, Opera 11.5+ 等瀏覽器會另外儲存至 Cookie 與 Local Storage，可隨時供 javascript 或後端語言使用，例如：
+IE 9+, Edge 12+, Chrome 4+, Firefox 3.5+, Safari 4+, Opera 11.5+ 等瀏覽器會另外儲存至 Local Storage 例如：
 ```
 {"project":"urBrowser","version":"4.0.1b","author":"Kei Cheng","getNameByAgent":"chrome","getPlatform":"mac","getBrowserWithCoreName":{"origin":"chrome","name":"chrome6","core":"webkit","addon":"","full":"chrome chrome6 webkit"},"getOSName":"mac","getBrowserName":{"name":"chrome","origin":"","classes":"chrome chrome6 webkit"},"getBrowserVersion":{"int":6,"full":"6"},"getDevice":"desktop","getOrientation":"portrait","isInApp":false,"isWebView":false,"getBreakpointRange":"lg","classes":"desktop chrome chrome6 webkit"}
 ```
@@ -94,7 +94,7 @@ urBrowser 會將使用者的裝置類型與瀏覽器資訊紀錄於```class```�
 <html class="yandex chrome webkit">
 ```
 
-針對以上範例，在CSS Hack上就可以這麼寫：
+針對 IE 瀏覽器，在CSS Hack上就可以這麼寫：
 ```
 .ie11 .selector {
     opacity: .5;
@@ -170,7 +170,7 @@ urBrowser 會將使用者的裝置類型與瀏覽器資訊紀錄於```class```�
 ### Webview
 當使用 Webview 時，在某些情況下可能只需要針對 Webview 處理某些操作或是修正，因此如果你有使用 Webview 時，可在 User Agent 加上以下字串：cordova 或 phonegap 或 react 或 nodejs 或 webview 等字樣，如需分辨 iOS 與 Andoird 可如下表示：
 - iOS: webview-ios
-- Android: webview-android
+- Android: webview-adr
 在 ```html``` 標籤上就會顯示以下資訊：
 ```
 <html class="webview-ios webview webkit" data-webview="ios">
@@ -190,9 +190,9 @@ urBrowser 會將使用者的裝置類型與瀏覽器資訊紀錄於```class```�
 ***
 
 ### 使用者的裝置
-裝置資料以 Desktop, Mobile 兩種來區分，並且記錄於 class 與 data-device，例如：
+裝置資料以 Desktop, Mobile 兩種來區分，並且記錄於 class 與 data-device-type，例如：
 ```
-<html class="desktop" data-device="desktop">
+<html class="desktop" data-device-type="desktop">
 ```
 
 ***
@@ -211,7 +211,7 @@ urBrowser 會將使用者的裝置類型與瀏覽器資訊紀錄於```class```�
 ***
 
 ### LocalStorage
-urBrowser 會將所有資訊記錄於 LocalStorage，後端可透過 Cookie 取得資料，javascript 取得使用者瀏覽器資訊時，可直接透過 LocalStorage 取得，例如：
+urBrowser 會將所有資訊記錄於 LocalStorage，例如：
 ```
 var urb = localStorage.getItem('urbrowser');
 
@@ -227,18 +227,11 @@ console.log(urb.getBrowserWithCoreName);
 }
 */
 ```
-注意：不支援 IE 9 以下版本 (IE 9 以下應該也不需要處理 RWD 或 AWD 才是)
 
 LocalStorage 資料
 ```
 {"project":"urBrowser","version":"4.0.1b","author":"Kei Cheng","getNameByAgent":"chrome","getPlatform":"mac","getBrowserWithCoreName":{"origin":"chrome","name":"chrome6","core":"webkit","addon":"","full":"chrome chrome6 webkit"},"getOSName":"mac","getBrowserName":{"name":"chrome","origin":"","classes":"chrome chrome6 webkit"},"getBrowserVersion":{"int":6,"full":"6"},"getDevice":"desktop","getOrientation":"portrait","isInApp":false,"isWebView":false,"getBreakpointRange":"lg","classes":"desktop chrome chrome6 webkit"}
 ```
-
-***
-
-### 瀏覽器支援
-最後，urBrowser 可支援的瀏覽器包含：IE 9+, Edge 12+, Chrome 4+, Firefox 3.5+, Safari 4+, Opera 11.5+。
-IE 6 至 IE 8 僅顯示瀏覽器資訊於 <html>上，但不會將資訊儲存於 Cookie 與 Web Storage。IE 8 雖然支援 Web Storage，但是正常來說因為製作 RWD 或 AWD 時應該不太會需要支援到 IE 8，所以就放棄了。
 
 ***
 
