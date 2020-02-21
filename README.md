@@ -1,22 +1,22 @@
 # Kule urBrowser
 Kule urBrowser 會把使用者的作業系統、裝置以及瀏覽器等資訊紀錄下來，並且儲存於 Localstorage、Cookie 與 html 標籤上。例如：
 ```
-<html id="mac" class="desktop chrome chrome6 webkit" data-browser-name="chrome" data-browser-version="6" data-browser-core="webkit" data-os-name="mac" data-device="desktop" data-bp="lg" data-inapp="false" data-webview="false" data-ub-version="4.0.2b">
+<html id="mac" class="desktop chrome chrome6 webkit" data-browser-name="chrome" data-browser-version="6" data-browser-core="webkit" data-os-name="mac" data-device="desktop" data-bp="lg" data-inapp="false" data-webview="false" data-ub-version="4.3.7">
 ```
 
 ***
 
 ## 使用方式
-你可以[下載檔案](http://urbrowser.kule.tw/assets/js/kule.urbrowser.min.js) (ver. 4.0.6b)
+你可以[下載檔案](http://urbrowser.kule.tw/assets/js/kule.urbrowser.min.js) (ver. 4.3.7b)
 並且載入到你的網頁中，urBrowser就會自動執行，建議是第一個載入順序或放在所有 Javascript 的第一行。
 ```
-<script id="urbrowser" data-domain="你的網域" src="path/to/kule.urbrowser.min.js"></script>
+<script id="urbrowser" src="path/to/kule.urbrowser.min.js"></script>
 ```
 
 ***
 
 ## 使用說明
-無論使用以上哪一種方式，你可以將你的網域加入至 data-domain 。當網頁讀取時就會自動開始執行，並且將使用者的瀏覽器、作業系統、平台等等資訊記錄下來並置放於```<html>```上，例如：
+當網頁讀取時就會自動開始執行，並且將使用者的瀏覽器、作業系統、平台等等資訊記錄下來並置放於```<html>```上，例如：
 ```
 <html id="mac" class="desktop chrome chrome6 webkit" data-browser-name="chrome" data-browser-version="6" data-browser-core="webkit" data-os-name="mac" data-device="desktop" data-bp="lg" data-inapp="false" data-webview="false" data-ub-version="4.0.1b">
 ```
@@ -210,8 +210,8 @@ urBrowser 會將使用者的裝置類型與瀏覽器資訊紀錄於```class```�
 
 ***
 
-### LocalStorage 與 Cookie
-urBrowser 會將所有資訊記錄於 LocalStorage 與 Cookie(預設時效為365天)，後端可透過 Cookie 取得資料，javascript 取得使用者瀏覽器資訊時，可直接透過 LocalStorage 取得，例如：
+### LocalStorage
+urBrowser 會將所有資訊記錄於 LocalStorage，後端可透過 Cookie 取得資料，javascript 取得使用者瀏覽器資訊時，可直接透過 LocalStorage 取得，例如：
 ```
 var urb = localStorage.getItem('urbrowser');
 
@@ -234,96 +234,6 @@ LocalStorage 資料
 {"project":"urBrowser","version":"4.0.1b","author":"Kei Cheng","getNameByAgent":"chrome","getPlatform":"mac","getBrowserWithCoreName":{"origin":"chrome","name":"chrome6","core":"webkit","addon":"","full":"chrome chrome6 webkit"},"getOSName":"mac","getBrowserName":{"name":"chrome","origin":"","classes":"chrome chrome6 webkit"},"getBrowserVersion":{"int":6,"full":"6"},"getDevice":"desktop","getOrientation":"portrait","isInApp":false,"isWebView":false,"getBreakpointRange":"lg","classes":"desktop chrome chrome6 webkit"}
 ```
 
-Cookie 資料
-```
-urbrowser={"project":"urBrowser","version":"4.0.1b","author":"Kei Cheng","getNameByAgent":"chrome","getPlatform":"mac","getBrowserWithCoreName":{"origin":"chrome","name":"chrome6","core":"webkit","addon":"","full":"chrome chrome6 webkit"},"getOSName":"mac","getBrowserName":{"name":"chrome","origin":"","classes":"chrome chrome6 webkit"},"getBrowserVersion":{"int":6,"full":"6"},"getDevice":"desktop","getOrientation":"portrait","isInApp":false,"isWebView":false,"getBreakpointRange":"lg","classes":"desktop chrome chrome6 webkit"}}
-```
-
-可指定 Cookie 的 domain，設定屬性 ```data-domain=".你的網域"```：
-```
-<script data-domain=".你的網域" src="你的路徑/kule.urbrowser.min.js"></script>
-```
-
-如果要將 Cookie 傳送給後端時，可設定屬性 ```data-reload="true"```，此後使用者第一次登入網站時，將會檢查是否已存在 urbrowser 資料而判斷是否需要 reload 網站：
-```
-<script data-reload="true" src="path/to/kule.urbrowser.min.js"></script>
-```
-
-當後端要使用時，以PHP為例：
-```
-<?php
-    $urbrowser = json_decode($_COOKIE['urbrowser']);
-    $layout = $urbrowser->getDevice;
-
-    if ($layout === 'desktop') {
-        //dosomething...
-    }
-
-    if ($layout === 'mobile') {
-        //dosomething...
-    }
-?>
-```
-
-以下為 PHP var_dump 之後出來的例子：
-```
-object(stdClass)#2 (15) {
-  ["project"]=>
-  string(9) "urBrowser"
-  ["version"]=>
-  string(6) "4.0.1b"
-  ["author"]=>
-  string(9) "Kei Cheng"
-  ["getNameByAgent"]=>
-  string(6) "chrome"
-  ["getPlatform"]=>
-  string(3) "mac"
-  ["getBrowserWithCoreName"]=>
-  object(stdClass)#3 (5) {
-    ["origin"]=>
-    string(6) "chrome"
-    ["name"]=>
-    string(7) "chrome6"
-    ["core"]=>
-    string(6) "webkit"
-    ["addon"]=>
-    string(0) ""
-    ["full"]=>
-    string(21) "chrome chrome6 webkit"
-  }
-  ["getOSName"]=>
-  string(3) "mac"
-  ["getBrowserName"]=>
-  object(stdClass)#4 (3) {
-    ["name"]=>
-    string(6) "chrome"
-    ["origin"]=>
-    string(0) ""
-    ["classes"]=>
-    string(21) "chrome chrome6 webkit"
-  }
-  ["getBrowserVersion"]=>
-  object(stdClass)#5 (2) {
-    ["int"]=>
-    int(6)
-    ["full"]=>
-    string(1) "6"
-  }
-  ["getDevice"]=>
-  string(7) "desktop"
-  ["getOrientation"]=>
-  string(8) "portrait"
-  ["isInApp"]=>
-  bool(false)
-  ["isWebView"]=>
-  bool(false)
-  ["getBreakpointRange"]=>
-  string(2) "lg"
-  ["classes"]=>
-  string(29) "desktop chrome chrome6 webkit"
-}
-```
-
 ***
 
 ### 瀏覽器支援
@@ -333,7 +243,7 @@ IE 6 至 IE 8 僅顯示瀏覽器資訊於 <html>上，但不會將資訊儲存�
 ***
 
 * Author: Kei Cheng
-* Website: http://www.kule.tw
+* Website: https://www.kule.tw
 * Github: https://github.com/keicheng/urbrowser
 * Facebook: https://www.facebook.com/kule.tw
 * CDN: https://cdnjs.com/libraries/kule.lazy
